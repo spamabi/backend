@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const { dbConnect } = require('./utiles/db');
 
 require('dotenv').config()
 
@@ -16,6 +17,6 @@ app.use(cookieParser());
 
 app.use('/api', require('./routes/authRoutes'))
 app.get('/', (req, res) => res.send('API server is running'))
-
+dbConnect();
 const port = process.env.PORT;
 app.listen(port, () => console.log(`The server is running on port ${port}`))
